@@ -88,7 +88,7 @@
 			outputPaths = ();
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then exit 0; fi\ncd \"$SRCROOT/..\"\n./gradlew :demo:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then exit 0; fi\ncd \"$SRCROOT/..\"\n./gradlew :demo-ios:embedAndSignAppleFrameworkForXcode\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 /* Begin PBXSourcesBuildPhase section */
@@ -115,7 +115,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
-				FRAMEWORK_SEARCH_PATHS = ("$(inherited)", "$(SRCROOT)/../demo/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)");
+				FRAMEWORK_SEARCH_PATHS = ("$(inherited)", "$(SRCROOT)/../demo-ios/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)");
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CADisableMinimumFrameDurationOnPhone = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Horizon Bloom";
@@ -134,7 +134,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
-				FRAMEWORK_SEARCH_PATHS = ("$(inherited)", "$(SRCROOT)/../demo/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)");
+				FRAMEWORK_SEARCH_PATHS = ("$(inherited)", "$(SRCROOT)/../demo-ios/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)");
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CADisableMinimumFrameDurationOnPhone = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Horizon Bloom";

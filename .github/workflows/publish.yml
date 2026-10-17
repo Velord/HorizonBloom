@@ -55,4 +55,7 @@ jobs:
               exit 1
             fi
           done
-          ./gradlew :horizon-bloom:publishToMavenCentral "-PVERSION_NAME=$RELEASE_VERSION"
+          ./gradlew \
+            :horizon-bloom:publishToMavenCentral \
+            :demo:publishToMavenCentral \
+            "-PVERSION_NAME=$RELEASE_VERSION"

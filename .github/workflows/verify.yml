@@ -24,6 +24,7 @@ jobs:
             :demo:compileAndroidMain \
             :horizon-bloom:compileKotlinDesktop \
             :demo:compileKotlinDesktop \
+            :demo-desktop:compileKotlinDesktop \
             :demo-android:assembleDebug
 
   ios:
@@ -41,7 +42,9 @@ jobs:
             :horizon-bloom:compileKotlinIosArm64 \
             :horizon-bloom:compileKotlinIosSimulatorArm64 \
             :demo:compileKotlinIosArm64 \
-            :demo:compileKotlinIosSimulatorArm64
+            :demo:compileKotlinIosSimulatorArm64 \
+            :demo-ios:compileKotlinIosArm64 \
+            :demo-ios:compileKotlinIosSimulatorArm64
       - name: Build iOS demo app
         run: |
           xcodebuild \

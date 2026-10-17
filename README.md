@@ -150,13 +150,19 @@ The custom scene derives from Twilight with a shifted sun and tuned light:
 
 ## Run the demo
 
-The included demo lets you switch presets, edit colors, adjust effect strengths, pause animation, and test pointer interaction. It is separate from the published library.
+The included demo lets you switch presets, edit colors, adjust effect strengths,
+pause animation, and test pointer interaction. Its editor is prepared as a
+separate optional Maven artifact:
+`io.github.velord.horizonbloom:demo:<version>`. Once released, add it to
+`commonMain` and call `HorizonDemoApp(onBackClick)` from your navigation host.
+Version 0.1.0 contains only the renderer; the demo artifact starts with the
+next release.
 
 <img src="docs/media/demo-controls.png" alt="Desktop demo with preset buttons, color pickers and effect sliders" width="760" />
 
 | Platform | Run |
 | --- | --- |
-| Desktop | `./gradlew :demo:run` |
+| Desktop | `./gradlew :demo-desktop:run` |
 | Android | `./gradlew :demo-android:installDebug`, then launch **Horizon Bloom** |
 | iOS | Open `iosApp/HorizonBloomDemo.xcodeproj` in Xcode and run the `HorizonBloomDemo` scheme |
 
@@ -178,4 +184,7 @@ Set `interactive = false` to disable tap and drag input. See the [effect referen
 
 ## License
 
-[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0). Source and demo are in this repository; only the `:horizon-bloom` module is intended for Maven Central. See the [publishing guide](docs/PUBLISHING.md) for the release process.
+[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+Source and demo are in this repository. The `:horizon-bloom` and `:demo`
+modules are intended for Maven Central. See the
+[publishing guide](docs/PUBLISHING.md) for the release process.

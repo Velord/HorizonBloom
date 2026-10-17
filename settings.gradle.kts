@@ -19,3 +19,5 @@ rootProject.name = "HorizonBloom"
 include(":horizon-bloom")
 include(":demo")
 include(":demo-android")
+include(":demo-desktop")
+include(":demo-ios")

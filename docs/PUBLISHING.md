@@ -1,8 +1,10 @@
 # Maven Central release preparation
 
-Horizon Bloom's public Maven coordinates are `io.github.velord:horizon-bloom:<version>`.
-The `:horizon-bloom` module is the only published module. The demo applications
-are not part of the Maven Central release.
+Horizon Bloom's Maven coordinates are `io.github.velord:horizon-bloom:<version>`
+for the renderer and `io.github.velord.horizonbloom:demo:<version>` for the
+optional editor. Only `:horizon-bloom` and `:demo` are configured for
+publication. Version 0.1.0 contains only the renderer; the demo artifact starts
+with a later release. The demo applications are not part of Maven Central.
 
 ## One-time publisher setup
 
@@ -30,48 +32,52 @@ are not part of the Maven Central release.
 
 Do not copy private keys or credentials into this repository or into logs.
 
-## Verify before the first upload
+## Verify before upload
 
 From a checked-out release commit with JDK 21:
 
 ```shell
 ./gradlew :horizon-bloom:compileAndroidMain :horizon-bloom:compileKotlinDesktop
 ./gradlew :demo:compileAndroidMain :demo:compileKotlinDesktop
+./gradlew :demo-desktop:compileKotlinDesktop :demo-android:assembleDebug
 ./gradlew :horizon-bloom:generatePomFileForKotlinMultiplatformPublication
 ./gradlew :horizon-bloom:checkPomFileForKotlinMultiplatformPublication
+./gradlew :demo:generatePomFileForKotlinMultiplatformPublication
+./gradlew :demo:checkPomFileForKotlinMultiplatformPublication
 ```
 
-Review the generated Kotlin Multiplatform POM, including the Apache 2.0 license,
-developer, SCM metadata, and the `io.github.velord` Maven group. Supply the chosen
-public contact through `POM_DEVELOPER_EMAIL` in a private Gradle property or
+Review both generated Kotlin Multiplatform POMs, including the Apache 2.0 license,
+developer, SCM metadata, and both Maven groups. Check that the demo publication
+depends on the matching renderer version. Supply the chosen public contact
+through `POM_DEVELOPER_EMAIL` in a private Gradle property or
 `ORG_GRADLE_PROJECT_POM_DEVELOPER_EMAIL` environment variable when checking
 POM metadata. The email is embedded in the published POM.
 
-Run iOS builds and inspect all platform publication artifacts on macOS. The
-publish workflow uses macOS so all platform variants can be assembled.
+On macOS, compile both iOS targets for `:demo` and `:demo-ios`, build the Xcode
+app, and inspect all platform publication artifacts. The publish workflow uses
+macOS so all platform variants can be assembled.
 
-## First release (only when explicitly approved)
+## Next release (only when explicitly approved)
 
 1. Review the release commit and verify the GitHub repository contains a
    complete `LICENSE` file, a valid public-facing README, and no secrets.
 2. Ensure `io.github.velord` is verified, all four GitHub secrets and the public
-   contact email variable are installed,
-   and the `maven-central` environment is configured.
-3. After authorizing release, push the release commit and create/push tag
-   `v0.1.0` (or a later `vX.Y.Z`). **Do not reuse an existing release version.**
+   contact email variable are installed, and the `maven-central` environment
+   is configured.
+3. After authorizing release, push the release commit and create/push a new
+   `vX.Y.Z` tag (for example, `v0.1.1`). **Do not reuse version 0.1.0.**
 4. Manually start the **Prepare Maven Central Deployment** workflow using the
-   exact version `0.1.0` without the `v` prefix. No push, tag, or GitHub
-   Release event starts this workflow automatically.
-5. The workflow uploads a signed deployment to Central Portal. It does **not**
-   publish the deployment for Maven Central consumption.
-6. Review validation in https://central.sonatype.com/publishing/deployments
+   tag's version without the `v` prefix. No push, tag, or GitHub Release event
+   starts this workflow automatically.
+5. The workflow uploads signed artifacts to Central Portal. It does **not**
+   publish them for Maven Central consumption.
+6. Review every deployment in https://central.sonatype.com/publishing/deployments
    and manually select **Publish** only after approval.
-7. After Central indexing completes, verify installation from a separate KMP
-   project with `implementation("io.github.velord:horizon-bloom:0.1.0")`.
+7. After Central indexing completes, verify both artifacts from a separate KMP
+   project using the same release version. Confirm the demo resolves the
+   renderer transitively.
 
-The repository can remain private while configuring publication. Evaluate
-public visibility, license notices, and release documentation separately
-before the first public release.
+Review license notices and release documentation before each public release.
 
 References:
 - https://vanniktech.github.io/gradle-maven-publish-plugin/central/

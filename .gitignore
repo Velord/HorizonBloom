@@ -3,5 +3,9 @@
 **/build/
 local.properties
 *.iml
+/HorizonBloom-signing/
+/DerivedData/
+**/xcuserdata/
+*.xcuserstate
 /.kotlin/metadata/kotlinTransformedMetadataLibraries
 /gradle/gradle-daemon-jvm.properties

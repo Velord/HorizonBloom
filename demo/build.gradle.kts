@@ -3,7 +3,11 @@ plugins {
     alias(libs.plugins.android.multiplatform.library)
     alias(libs.plugins.multiplatform.compose)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.maven.publish)
 }
+
+group = "io.github.velord.horizonbloom"
+version = providers.gradleProperty("VERSION_NAME").orElse("0.1.0-SNAPSHOT").get()
 
 kotlin {
     android {
@@ -12,33 +16,56 @@ kotlin {
         minSdk = 26
     }
     jvm("desktop")
-    val iosTargets = listOf(iosArm64(), iosSimulatorArm64())
-    iosTargets.forEach { target ->
-        target.binaries.framework {
-            baseName = "HorizonBloomDemo"
-            isStatic = true
-        }
-    }
+    iosArm64()
+    iosSimulatorArm64()
     jvmToolchain(21)
 
     sourceSets {
         commonMain.dependencies {
+            // Module Core
             implementation(project(":horizon-bloom"))
+            // Compose
             implementation(libs.bundles.compose.all)
+            // Lifecycle
             implementation(libs.bundles.androidx.lifecycle.all)
+            // Kotlin
             implementation(libs.kotlinx.coroutines.core)
-        }
-        getByName("desktopMain") {
-            dependencies {
-                implementation(compose.desktop.currentOs)
-                implementation(libs.kotlinx.coroutines.swing)
-            }
         }
     }
 }
 
-compose.desktop {
-    application {
-        mainClass = "com.velord.horizonbloom.demo.MainKt"
+mavenPublishing {
+    publishToMavenCentral()
+    signAllPublications()
+
+    pom {
+        name = "Horizon Bloom Demo"
+        description = "An interactive Compose Multiplatform editor for Horizon Bloom."
+        inceptionYear = "2026"
+        url = "https://github.com/Velord/HorizonBloom"
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "repo"
+            }
+        }
+        developers {
+            developer {
+                id = "Velord"
+                name = "Velord"
+                providers.gradleProperty("POM_DEVELOPER_EMAIL").orNull?.let { publicEmail ->
+                    email = publicEmail
+                }
+                organization = "Velord"
+                organizationUrl = "https://github.com/Velord"
+                url = "https://github.com/Velord"
+            }
+        }
+        scm {
+            url = "https://github.com/Velord/HorizonBloom"
+            connection = "scm:git:https://github.com/Velord/HorizonBloom.git"
+            developerConnection = "scm:git:ssh://git@github.com/Velord/HorizonBloom.git"
+        }
     }
 }
