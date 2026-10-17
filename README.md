@@ -6,7 +6,7 @@ A configurable sunrise over a curved planetary horizon, built with **Compose Mul
 
 Horizon Bloom combines atmospheric light, a glowing sun, aurora, stars, clouds, and subtle lens effects in a single Compose scene. Drag to shift the view; tap to trigger an aurora glow. Every effect can be adjusted independently.
 
-> **Release status:** `0.1.0` is being prepared for Maven Central. The library has **not been published yet**.
+> **Latest release:** [`v0.1.0`](https://github.com/Velord/HorizonBloom/releases/tag/v0.1.0) · [Available on Maven Central](https://central.sonatype.com/artifact/io.github.velord/horizon-bloom/0.1.0).
 
 [![Horizon Bloom animated Dawn, Twilight, Aurora, and custom scenes](docs/media/horizon-presets.gif)](docs/media/horizon-presets.mp4)
 
@@ -25,7 +25,7 @@ consistent.
 
 ## Get started
 
-Once the first release is available, add the library to your Kotlin Multiplatform module's `build.gradle.kts`:
+Add the library to your Kotlin Multiplatform module's `build.gradle.kts`:
 
 ```kotlin
 commonMain.dependencies {
