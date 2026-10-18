@@ -6,8 +6,8 @@ plugins {
     alias(libs.plugins.maven.publish)
 }
 
-group = "io.github.velord"
-version = providers.gradleProperty("VERSION_NAME").orElse("0.1.0-SNAPSHOT").get()
+group = "io.github.velord.horizonbloom"
+version = providers.gradleProperty("RELEASE_VERSION").orElse("0.1.1-SNAPSHOT").get()
 
 kotlin {
     android {
@@ -31,11 +31,12 @@ kotlin {
 }
 
 mavenPublishing {
+    coordinates(group.toString(), "core", version.toString())
     publishToMavenCentral()
     signAllPublications()
 
     pom {
-        name = "Horizon Bloom"
+        name = "Horizon Bloom Core"
         description = "A configurable Compose Multiplatform horizon light scene."
         inceptionYear = "2026"
         url = "https://github.com/Velord/HorizonBloom"

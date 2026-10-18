@@ -1,10 +1,16 @@
 # Maven Central release preparation
 
-Horizon Bloom's Maven coordinates are `io.github.velord:horizon-bloom:<version>`
-for the renderer and `io.github.velord.horizonbloom:demo:<version>` for the
-optional editor. Only `:horizon-bloom` and `:demo` are configured for
-publication. Version 0.1.0 contains only the renderer; the demo artifact starts
-with a later release. The demo applications are not part of Maven Central.
+The next release publishes two independent artifacts under one Maven group:
+
+| Gradle module | Maven coordinate for 0.1.1 | Purpose |
+| --- | --- | --- |
+| `:horizon-bloom` | `io.github.velord.horizonbloom:core:0.1.1` | Reusable renderer |
+| `:demo` | `io.github.velord.horizonbloom:demo:0.1.1` | Optional interactive editor |
+
+Version 0.1.1 is **prepared but not yet published**. The existing 0.1.0
+release contains only the renderer. The demo applications (`:demo-android`,
+`:demo-desktop`, and `:demo-ios`) are not published to Maven Central.
+A `demo` dependency must resolve the matching `core` version transitively.
 
 ## One-time publisher setup
 
@@ -34,7 +40,9 @@ Do not copy private keys or credentials into this repository or into logs.
 
 ## Verify before upload
 
-From a checked-out release commit with JDK 21:
+From a checked-out release commit with JDK 21, append
+`-PRELEASE_VERSION=0.1.1` to each Gradle command below when validating the
+planned release:
 
 ```shell
 ./gradlew :horizon-bloom:compileAndroidMain :horizon-bloom:compileKotlinDesktop
@@ -47,11 +55,11 @@ From a checked-out release commit with JDK 21:
 ```
 
 Review both generated Kotlin Multiplatform POMs, including the Apache 2.0 license,
-developer, SCM metadata, and both Maven groups. Check that the demo publication
-depends on the matching renderer version. Supply the chosen public contact
-through `POM_DEVELOPER_EMAIL` in a private Gradle property or
-`ORG_GRADLE_PROJECT_POM_DEVELOPER_EMAIL` environment variable when checking
-POM metadata. The email is embedded in the published POM.
+developer, SCM metadata, group `io.github.velord.horizonbloom`, and distinct
+artifact IDs `core` and `demo`. Check that `demo` depends on the matching
+`core` version. Supply your approved public contact in the private
+`ORG_GRADLE_PROJECT_POM_DEVELOPER_EMAIL` environment variable when validating
+POM metadata; the email is embedded in the published POM. Never commit it.
 
 On macOS, compile both iOS targets for `:demo` and `:demo-ios`, build the Xcode
 app, and inspect all platform publication artifacts. The publish workflow uses

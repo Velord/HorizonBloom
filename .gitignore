@@ -1,11 +1,34 @@
+# Local Gradle / Kotlin state and build output
 .gradle/
 .idea/
+/.kotlin/
+/.konan/
 **/build/
+/out/
+**/.cxx/
+**/.externalNativeBuild/
+/gradle/gradle-daemon-jvm.properties
 local.properties
 *.iml
+
+# Local publishing credentials and signing material (never commit)
 /HorizonBloom-signing/
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.p8
+*.pem
+*.key
+*.asc
+*.gpg
+.env
+.env.*
+!.env.example
+
+# Generated Xcode content and machine-specific files
 /DerivedData/
 **/xcuserdata/
 *.xcuserstate
-/.kotlin/metadata/kotlinTransformedMetadataLibraries
-/gradle/gradle-daemon-jvm.properties
+.DS_Store
+Thumbs.db

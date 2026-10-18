@@ -25,11 +25,13 @@ consistent.
 
 ## Get started
 
-Add the library to your Kotlin Multiplatform module's `build.gradle.kts`:
+The upcoming **0.1.1 release** (not yet published) will use the shared Maven group
+`io.github.velord.horizonbloom`. After that release is available, add the
+renderer (`core`) to your Kotlin Multiplatform module's `build.gradle.kts`:
 
 ```kotlin
 commonMain.dependencies {
-    implementation("io.github.velord:horizon-bloom:0.1.0")
+    implementation("io.github.velord.horizonbloom:core:0.1.1")
 }
 ```
 
@@ -151,12 +153,20 @@ The custom scene derives from Twilight with a shifted sun and tuned light:
 ## Run the demo
 
 The included demo lets you switch presets, edit colors, adjust effect strengths,
-pause animation, and test pointer interaction. Its editor is prepared as a
-separate optional Maven artifact:
-`io.github.velord.horizonbloom:demo:<version>`. Once released, add it to
-`commonMain` and call `HorizonDemoApp(onBackClick)` from your navigation host.
-Version 0.1.0 contains only the renderer; the demo artifact starts with the
-next release.
+pause animation, and test pointer interaction. The interactive editor is an
+optional, separately publishable Compose Multiplatform artifact. Once version
+0.1.1 is released, add it to `commonMain`:
+
+```kotlin
+commonMain.dependencies {
+    implementation("io.github.velord.horizonbloom:demo:0.1.1")
+}
+```
+
+Call `HorizonDemoApp(onBackClick)` from your Compose navigation host. The demo
+resolves the matching `core` artifact transitively; you do not need to declare
+both unless you also consume `core` directly. Version 0.1.0 contains only the
+original renderer; the new coordinates are prepared for 0.1.1.
 
 <img src="docs/media/demo-controls.png" alt="Desktop demo with preset buttons, color pickers and effect sliders" width="760" />
 

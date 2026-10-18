@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "io.github.velord.horizonbloom"
-version = providers.gradleProperty("VERSION_NAME").orElse("0.1.0-SNAPSHOT").get()
+version = providers.gradleProperty("RELEASE_VERSION").orElse("0.1.1-SNAPSHOT").get()
 
 kotlin {
     android {
@@ -35,6 +35,7 @@ kotlin {
 }
 
 mavenPublishing {
+    coordinates(group.toString(), "demo", version.toString())
     publishToMavenCentral()
     signAllPublications()
 

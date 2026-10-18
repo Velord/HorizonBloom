@@ -58,4 +58,4 @@ jobs:
           ./gradlew \
             :horizon-bloom:publishToMavenCentral \
             :demo:publishToMavenCentral \
-            "-PVERSION_NAME=$RELEASE_VERSION"
+            "-PRELEASE_VERSION=$RELEASE_VERSION"
