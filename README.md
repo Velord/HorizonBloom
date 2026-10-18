@@ -6,7 +6,7 @@ A configurable sunrise over a curved planetary horizon, built with **Compose Mul
 
 Horizon Bloom combines atmospheric light, a glowing sun, aurora, stars, clouds, and subtle lens effects in a single Compose scene. Drag to shift the view; tap to trigger an aurora glow. Every effect can be adjusted independently.
 
-> **Latest release:** [`v0.1.0`](https://github.com/Velord/HorizonBloom/releases/tag/v0.1.0) · [Available on Maven Central](https://central.sonatype.com/artifact/io.github.velord/horizon-bloom/0.1.0).
+> **Latest release:** [`v0.1.1`](https://github.com/Velord/HorizonBloom/tree/v0.1.1) · [Core on Maven Central](https://central.sonatype.com/artifact/io.github.velord.horizonbloom/core/0.1.1) · [Demo on Maven Central](https://central.sonatype.com/artifact/io.github.velord.horizonbloom/demo/0.1.1).
 
 [![Horizon Bloom animated Dawn, Twilight, Aurora, and custom scenes](docs/media/horizon-presets.gif)](docs/media/horizon-presets.mp4)
 
@@ -25,8 +25,8 @@ consistent.
 
 ## Get started
 
-The upcoming **0.1.1 release** (not yet published) will use the shared Maven group
-`io.github.velord.horizonbloom`. After that release is available, add the
+The **0.1.1 release** is published under the shared Maven group
+`io.github.velord.horizonbloom`. Add the
 renderer (`core`) to your Kotlin Multiplatform module's `build.gradle.kts`:
 
 ```kotlin
@@ -154,8 +154,7 @@ The custom scene derives from Twilight with a shifted sun and tuned light:
 
 The included demo lets you switch presets, edit colors, adjust effect strengths,
 pause animation, and test pointer interaction. The interactive editor is an
-optional, separately publishable Compose Multiplatform artifact. Once version
-0.1.1 is released, add it to `commonMain`:
+optional, published Compose Multiplatform artifact. Add it to `commonMain`:
 
 ```kotlin
 commonMain.dependencies {
@@ -166,7 +165,7 @@ commonMain.dependencies {
 Call `HorizonDemoApp(onBackClick)` from your Compose navigation host. The demo
 resolves the matching `core` artifact transitively; you do not need to declare
 both unless you also consume `core` directly. Version 0.1.0 contains only the
-original renderer; the new coordinates are prepared for 0.1.1.
+original renderer under the legacy Maven coordinates.
 
 <img src="docs/media/demo-controls.png" alt="Desktop demo with preset buttons, color pickers and effect sliders" width="760" />
 
@@ -196,5 +195,5 @@ Set `interactive = false` to disable tap and drag input. See the [effect referen
 
 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 Source and demo are in this repository. The `:horizon-bloom` and `:demo`
-modules are intended for Maven Central. See the
+modules are published on Maven Central. See the
 [publishing guide](docs/PUBLISHING.md) for the release process.

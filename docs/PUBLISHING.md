@@ -1,14 +1,14 @@
 # Maven Central release preparation
 
-The next release publishes two independent artifacts under one Maven group:
+Version 0.1.1 publishes two independent artifacts under one Maven group:
 
 | Gradle module | Maven coordinate for 0.1.1 | Purpose |
 | --- | --- | --- |
 | `:horizon-bloom` | `io.github.velord.horizonbloom:core:0.1.1` | Reusable renderer |
 | `:demo` | `io.github.velord.horizonbloom:demo:0.1.1` | Optional interactive editor |
 
-Version 0.1.1 is **prepared but not yet published**. The existing 0.1.0
-release contains only the renderer. The demo applications (`:demo-android`,
+Version 0.1.1 is **published on Maven Central**. Version 0.1.0
+contains only the renderer under the legacy Maven coordinates. The demo applications (`:demo-android`,
 `:demo-desktop`, and `:demo-ios`) are not published to Maven Central.
 A `demo` dependency must resolve the matching `core` version transitively.
 
@@ -41,7 +41,7 @@ Do not copy private keys or credentials into this repository or into logs.
 ## Verify before upload
 
 From a checked-out release commit with JDK 21, append
-`-PRELEASE_VERSION=0.1.1` to each Gradle command below when validating the
+`-PRELEASE_VERSION=X.Y.Z` to each Gradle command below when validating the
 planned release:
 
 ```shell
@@ -73,7 +73,7 @@ macOS so all platform variants can be assembled.
    contact email variable are installed, and the `maven-central` environment
    is configured.
 3. After authorizing release, push the release commit and create/push a new
-   `vX.Y.Z` tag (for example, `v0.1.1`). **Do not reuse version 0.1.0.**
+   `vX.Y.Z` tag (for example, `v0.1.2`). **Never reuse an already published version.**
 4. Manually start the **Prepare Maven Central Deployment** workflow using the
    tag's version without the `v` prefix. No push, tag, or GitHub Release event
    starts this workflow automatically.
